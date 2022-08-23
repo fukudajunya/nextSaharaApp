@@ -1,12 +1,20 @@
 <ons-page>
   <ons-toolbar>
     <div class="center" id="form-title">タスク一覧</div>
+    <div class="left">
+      <ons-toolbar-button id="logout">
+        <ons-icon icon="md-lock"></ons-icon>
+      </ons-toolbar-button>
+    </div>
     <div class="right">
       <ons-toolbar-button id="add">
         <ons-icon icon="fa-plus"></ons-icon>
       </ons-toolbar-button>
     </div>
   </ons-toolbar>
+
+<!-- split menu -->
+
   <p>
     <h3>タスク一覧</h3>
     <ons-list id="tasks">
@@ -102,6 +110,18 @@ async function getTaskList() {
 
         $('#add').on('click', e => {
           $('#nav')[0].pushPage('add.html');
+        })
+
+        $('#logout').on('click', e => {
+          ncmb.User.logout()
+            .then(function(){
+                // ログアウト完了
+                $('#nav')[0].pushPage('login.html');
+            })
+            .catch(function(err){
+                // ログアウト失敗(セッション情報削除)
+                localStorage.removeItem("NCMB/"+ncmb.apikey+"/currentUser");
+            })
         })
       }
     })();

@@ -49,8 +49,17 @@
         const user = new ncmb.User();
             user
                 .set('userName', userName)
-                .set('password', password);
+                .set('password', password)
+                .set('status', true);
             await user.signUpByAccount();
+        // ユーザーのインスタンスを作成
+        const loginUser = new (ncmb.DataStore('User'));
+        loginUser
+            .set('userName', userName)
+            .set('status', true)
+            .set('area', "")
+            .set('profile', "");
+        await loginUser.save();
         }
     })();
   </script>

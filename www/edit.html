@@ -15,6 +15,7 @@
     <p>
       <ons-input id="date" class="task_date" type="date" modifier="underbar" float></ons-input>
     </p>
+    <p id="users"></p>
     <p style="margin-top: 30px;">
       <ons-button id="updateTask">タスクを更新する</ons-button>
     </p>
@@ -22,6 +23,7 @@
   <script>
     (() => {
       ons.getScriptPage().onShow = async function() {
+        const page = this;
         task = this.data.task;
         for (const key in task) {
           let value = task.get(key);
@@ -31,6 +33,22 @@
           $(`.task_${key}_label`).html(value);
           $(`.task_${key}`).val(value);
         }
+        getUser(this);
+      }
+
+      async function getUser(page){
+          var curretUsers = ncmb.User.getCurrentUser()
+        //   var curretUsers = ncmb.User
+        //     .equalTo('status', true)
+        //     .limit(100)
+        //     .fetchAll();
+        //   page.querySelector('#users').innerHTML = curretUsers
+        //     .map(w => `<ons-list-item>${w.get('userName')}さん</ons-list-item>`)
+        //     .join('');
+          $("#users").text("ユーザー名:" + curretUsers.get("userName"));
+        //   page.querySelector('#users').innerHTML = curretUsers
+        //     .map(w => `<ons-list-item>${w.get('userName')}さん</ons-list-item>`)
+        //     .join('');
       }
 
       async function updateTask(title, date, body) {
@@ -49,6 +67,7 @@
           const body = $('#body').val();
           try {
             updateTask(title, date, body);
+            getUser();
             $('#nav')[0].popPage();
           } catch (e) {
             ons.notification.alert('タスクの更新に失敗しました');
