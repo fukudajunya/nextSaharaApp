@@ -24,8 +24,15 @@
   </script>
 </head>
 <body>
-  <ons-navigator id="nav" page="list.html"></ons-navigator>
-  This is a template for Onsen UI app.
+    <ons-page ng-controller="AppController">
+    <ons-tabbar id="tab">
+        <ons-tab page="tab.html" label="List" icon="fa-align-justify" active></ons-tab>
+        <ons-tab page="test.html" label="Edit" icon="fa-align-justify"></ons-tab>
+        <ons-tab page="test2.html" label="Add" icon="fa-align-justify"></ons-tab>
+    </ons-tabbar>
+    </ons-page>
+  <!-- <ons-navigator id="nav" page="tab.html"></ons-navigator>   -->
+  This is a template for Onsen UI app.  
   <script
   src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
   integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="

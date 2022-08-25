@@ -13,26 +13,25 @@
     </div>
   </ons-toolbar>
 
-<!-- split menu -->
-
   <p>
     <h3>タスク一覧</h3>
     <ons-list id="tasks">
     </ons-list>
   </p>
+
   <script>
     (() => {
       let tasks = [];
-async function getTaskList() {
-  // タスクのクラスを作成
-  const Task = ncmb.DataStore('Task');
-  // 未了なタスクを一覧で取得
-  tasks = await Task
-    .equalTo('done', false)
-    .limit(100)
-    .order('date') // 並び順は日付ごと
-    .fetchAll();
-}
+        async function getTaskList() {
+        // タスクのクラスを作成
+        const Task = ncmb.DataStore('Task');
+        // 未了なタスクを一覧で取得
+        tasks = await Task
+            .equalTo('done', false)
+            .limit(100)
+            .order('date') // 並び順は日付ごと
+            .fetchAll();
+        }
 
       function renderTasks() {
         const html = [];
